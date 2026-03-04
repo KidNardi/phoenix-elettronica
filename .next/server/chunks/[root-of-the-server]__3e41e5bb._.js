@@ -42,16 +42,40 @@ Set the \`cycles\` parameter to \`"ref"\` to resolve cyclical schemas with defs.
       <p><strong>Servizio:</strong> ${cG(e.service)}</p>
       <p><strong>Messaggio:</strong></p>
       <p>${cG(e.message).replace(/\n/g,"<br />")}</p>
-    `})}async function cW(e){let t=cH();await t.sendMail({from:cq(),to:cB(),subject:`[Preventivo] ${e.service} - ${e.name}`,text:["Nuova richiesta di preventivo\n",`Nome: ${e.name}`,`Telefono: ${e.phone}`,`Email: ${e.email}`,`Servizio: ${e.service}`,`Urgenza: ${e.urgency}`,`Zona: ${e.area}`,"\nDescrizione:",e.description].join("\n"),html:`
-      <h2>Nuova richiesta di preventivo</h2>
-      <p><strong>Nome:</strong> ${cG(e.name)}</p>
-      <p><strong>Telefono:</strong> ${cG(e.phone)}</p>
-      <p><strong>Email:</strong> ${cG(e.email)}</p>
-      <p><strong>Servizio:</strong> ${cG(e.service)}</p>
-      <p><strong>Urgenza:</strong> ${cG(e.urgency)}</p>
-      <p><strong>Zona:</strong> ${cG(e.area)}</p>
-      <p><strong>Descrizione:</strong></p>
-      <p>${cG(e.description).replace(/\n/g,"<br />")}</p>
-    `})}function cG(e){return e.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}e.s(["sendContactEmail",()=>cJ,"sendQuoteEmail",()=>cW],36940)}];
+    `})}async function cW(e){let t=cH(),i=cq(),n=cB();await Promise.all([t.sendMail({from:i,to:n,replyTo:e.email,subject:`[Preventivo] Nuovo preventivo - ${e.service} - ${e.name}`,text:["Nuovo preventivo ricevuto dal sito\n",`Nome: ${e.name}`,`Telefono: ${e.phone}`,`Email: ${e.email}`,`Servizio: ${e.service}`,`Urgenza: ${e.urgency}`,`Zona: ${e.area}`,"\nDescrizione:",e.description].join("\n"),html:`
+        <h2>Nuovo preventivo ricevuto dal sito</h2>
+        <p><strong>Nome:</strong> ${cG(e.name)}</p>
+        <p><strong>Telefono:</strong> ${cG(e.phone)}</p>
+        <p><strong>Email:</strong> ${cG(e.email)}</p>
+        <p><strong>Servizio:</strong> ${cG(e.service)}</p>
+        <p><strong>Urgenza:</strong> ${cG(e.urgency)}</p>
+        <p><strong>Zona:</strong> ${cG(e.area)}</p>
+        <p><strong>Descrizione:</strong></p>
+        <p>${cG(e.description).replace(/\n/g,"<br />")}</p>
+      `}),t.sendMail({from:i,to:e.email,subject:"Conferma richiesta preventivo - Phoenix Elettronica",text:`Ciao ${e.name},
+
+questa e' una mail autogenerata per confermare che la tua richiesta di preventivo e' stata inviata correttamente.
+
+Riepilogo richiesta:
+Servizio: ${e.service}
+Urgenza: ${e.urgency}
+Zona: ${e.area}
+
+Ti ricontatteremo il prima possibile.
+
+Phoenix Elettronica`,html:`
+        <h2>Richiesta di preventivo ricevuta</h2>
+        <p>Ciao ${cG(e.name)},</p>
+        <p>
+          Questa e' una mail autogenerata per confermare che la tua richiesta di preventivo e'
+          stata inviata correttamente.
+        </p>
+        <p><strong>Riepilogo richiesta:</strong></p>
+        <p><strong>Servizio:</strong> ${cG(e.service)}</p>
+        <p><strong>Urgenza:</strong> ${cG(e.urgency)}</p>
+        <p><strong>Zona:</strong> ${cG(e.area)}</p>
+        <p>Ti ricontatteremo il prima possibile.</p>
+        <p>Phoenix Elettronica</p>
+      `})])}function cG(e){return e.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}e.s(["sendContactEmail",()=>cJ,"sendQuoteEmail",()=>cW],36940)}];
 
 //# sourceMappingURL=%5Broot-of-the-server%5D__3e41e5bb._.js.map

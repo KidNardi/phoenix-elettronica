@@ -14,23 +14,26 @@ export function ServiceCard({ service, href = `/servizi#${service.slug}` }: Serv
   const Icon = iconMap[service.icon];
 
   return (
-    <Card className="group h-full border-white/10 bg-white/[0.02] transition-all duration-300 hover:-translate-y-1 hover:border-phoenix-200 hover:bg-white hover:shadow-soft">
-      <CardHeader className="space-y-4">
-        <div className="flex size-14 items-center justify-center rounded-2xl bg-phoenix-50 text-phoenix-600 transition-transform duration-300 group-hover:scale-105">
-          <Icon className="size-6" />
-        </div>
-        <CardTitle className="text-xl">{service.title}</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-5">
-        <p className="text-sm leading-6 text-muted-foreground">{service.short}</p>
-        <Link
-          href={href}
-          className="inline-flex items-center gap-2 text-sm font-semibold text-phoenix-600 transition-colors hover:text-phoenix-700"
-        >
-          Scopri il servizio
-          <ArrowUpRight className="size-4" />
-        </Link>
-      </CardContent>
-    </Card>
+    <Link
+      href={href}
+      className="group block h-full rounded-3xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-phoenix-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      aria-label={`Apri il servizio ${service.title}`}
+    >
+      <Card className="h-full border-border/70 bg-white transition-all duration-300 group-hover:-translate-y-1 group-hover:border-phoenix-200 group-hover:shadow-[0_18px_45px_-24px_rgba(249,115,22,0.35)]">
+        <CardHeader className="space-y-4">
+          <div className="flex size-14 items-center justify-center rounded-2xl bg-phoenix-50 text-phoenix-600 transition-transform duration-300 group-hover:scale-105">
+            <Icon className="size-6" />
+          </div>
+          <CardTitle className="text-xl leading-tight">{service.title}</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-5">
+          <p className="text-sm leading-6 text-muted-foreground">{service.short}</p>
+          <div className="inline-flex items-center gap-2 text-sm font-semibold text-phoenix-600 transition-colors group-hover:text-phoenix-700">
+            Scopri il servizio
+            <ArrowUpRight className="size-4" />
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
   );
 }

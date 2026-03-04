@@ -13,6 +13,7 @@ import {
 import { AnimatedSection } from "@/components/animated-section";
 import { CTAButton } from "@/components/cta-button";
 import { JsonLd } from "@/components/json-ld";
+import { QuickCtaBand } from "@/components/quick-cta-band";
 import { SectionTitle } from "@/components/section-title";
 import { ServiceCard } from "@/components/service-card";
 import { TestimonialCard } from "@/components/testimonial-card";
@@ -27,7 +28,6 @@ import {
   testimonials,
   whyPhoenix,
 } from "@/data/site";
-import { localSeoPages } from "@/data/local-seo";
 import {
   createLocalBusinessSchema,
   createPageMetadata,
@@ -65,7 +65,7 @@ export default function HomePage() {
   return (
     <div className="pb-20">
       <JsonLd data={[createLocalBusinessSchema(), createWebsiteSchema()]} />
-      <section className="relative overflow-hidden bg-charcoal text-white">
+      <section id="top" className="relative overflow-hidden bg-charcoal text-white">
         <div className="absolute inset-0 bg-hero-grid bg-[size:42px_42px] opacity-20" />
         <div className="absolute left-1/2 top-0 h-[460px] w-[460px] -translate-x-1/2 rounded-full bg-phoenix-500/20 blur-3xl" />
         <div className="container relative pb-16 pt-32 sm:pb-24 sm:pt-36">
@@ -75,11 +75,11 @@ export default function HomePage() {
                 Bari e provincia - Impianti elettrici ed elettronici
               </Badge>
               <h1 className="text-balance text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
-                Impianti, automazioni e manutenzioni con un'immagine premium e un servizio serio.
+                Impianti, automazioni e manutenzioni con interventi rapidi e soluzioni chiare.
               </h1>
               <p className="mt-6 max-w-xl text-pretty text-lg leading-8 text-white/75">
-                Phoenix Elettronica supporta condomini, aziende e privati con interventi rapidi,
-                preventivi chiari e soluzioni su misura costruite per durare.
+                Phoenix Elettronica lavora per condomini, aziende e privati a Bari e provincia,
+                con preventivi chiari e lavori pensati per durare.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg">
@@ -129,47 +129,36 @@ export default function HomePage() {
         </div>
       </section>
 
-      <AnimatedSection className="container py-20 sm:py-24">
-        <SectionTitle
-          eyebrow="Servizi"
-          title="Tutti i servizi principali, organizzati in modo chiaro."
-          description="Dalla manutenzione condominiale alla sicurezza, con percorsi chiari verso chiamata, contatto o preventivo."
-        />
-        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {services.map((service) => (
-            <ServiceCard key={service.slug} service={service} />
-          ))}
-        </div>
-      </AnimatedSection>
-
-      <AnimatedSection className="container py-4 sm:py-8">
-        <div className="grid gap-5 lg:grid-cols-4">
-          {whyPhoenix.map((item) => (
-            <Card key={item.title} className="border-border/70 bg-white">
-              <CardContent className="space-y-4 p-6">
-                <Sparkles className="size-8 text-phoenix-500" />
-                <h3 className="text-xl font-semibold">{item.title}</h3>
-                <p className="text-sm leading-6 text-muted-foreground">{item.text}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </AnimatedSection>
-
-      <AnimatedSection className="container py-20 sm:py-24">
-        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+      <AnimatedSection className="bg-white py-20 sm:py-24">
+        <div className="container">
           <SectionTitle
-            eyebrow="Metodo"
-            title="Come lavoriamo"
-            description="Un flusso semplice, leggibile e orientato a ridurre tempi morti: ascolto, proposta chiara, esecuzione precisa."
+            eyebrow="Servizi"
+            title="I principali servizi in un colpo d'occhio."
+            description="Apri la scheda che ti serve e vai subito al servizio o al preventivo."
           />
-          <div className="grid gap-5 md:grid-cols-3">
-            {processSteps.map((step) => (
-              <Card key={step.step} className="border-border/70 bg-white">
-                <CardContent className="space-y-5 p-6">
-                  <div className="text-sm font-semibold text-phoenix-600">{step.step}</div>
-                  <h3 className="text-xl font-semibold">{step.title}</h3>
-                  <p className="text-sm leading-6 text-muted-foreground">{step.text}</p>
+          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {services.map((service) => (
+              <ServiceCard key={service.slug} service={service} />
+            ))}
+          </div>
+          <div className="mt-8">
+            <QuickCtaBand
+              title="Hai gia' capito cosa ti serve?"
+              description="Chiama subito oppure lascia una richiesta rapida di preventivo."
+            />
+          </div>
+        </div>
+      </AnimatedSection>
+
+      <AnimatedSection className="bg-secondary/70 py-16 sm:py-20">
+        <div className="container">
+          <div className="grid gap-5 lg:grid-cols-4">
+            {whyPhoenix.map((item) => (
+              <Card key={item.title} className="border-border/70 bg-white">
+                <CardContent className="space-y-4 p-6">
+                  <Sparkles className="size-8 text-phoenix-500" />
+                  <h3 className="text-xl font-semibold">{item.title}</h3>
+                  <p className="text-sm leading-6 text-muted-foreground">{item.text}</p>
                 </CardContent>
               </Card>
             ))}
@@ -177,104 +166,113 @@ export default function HomePage() {
         </div>
       </AnimatedSection>
 
-      <AnimatedSection className="container py-4 sm:py-8">
-        <div className="grid gap-6 rounded-[2rem] border border-border/70 bg-white p-8 lg:grid-cols-[1fr_0.8fr] lg:items-center">
-          <div>
+      <AnimatedSection className="bg-charcoal py-20 text-white sm:py-24">
+        <div className="container">
+          <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
             <SectionTitle
-              eyebrow="Aree di intervento"
-              title="Operativita' locale, organizzazione rapida."
-              description="Phoenix Elettronica lavora a Bari e provincia, con attenzione specifica a interventi per condomini, aziende e contesti residenziali."
+              eyebrow="Metodo"
+              title="Come lavoriamo"
+              description="Sopralluogo, proposta chiara e intervento ordinato. Nessun passaggio superfluo."
+              tone="light"
+            />
+            <div className="grid gap-5 md:grid-cols-3">
+              {processSteps.map((step) => (
+                <Card key={step.step} className="border-white/10 bg-white/5 text-white">
+                  <CardContent className="space-y-5 p-6">
+                    <div className="text-sm font-semibold text-phoenix-300">{step.step}</div>
+                    <h3 className="text-xl font-semibold">{step.title}</h3>
+                    <p className="text-sm leading-6 text-white/70">{step.text}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </AnimatedSection>
+
+      <AnimatedSection className="bg-white py-16 sm:py-20">
+        <div className="container">
+          <div className="grid gap-6 rounded-[2rem] border border-border/70 bg-white p-8 lg:grid-cols-[1fr_0.8fr] lg:items-center">
+            <div>
+              <SectionTitle
+                eyebrow="Aree di intervento"
+                title="Operativi a Bari e provincia."
+                description="Supporto rapido per contesti residenziali, condominiali e professionali."
+              />
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Card className="border-border/70 bg-secondary/60">
+                <CardContent className="p-6">
+                  <p className="text-sm font-medium text-phoenix-600">Base operativa</p>
+                  <p className="mt-2 text-xl font-semibold">Bari (BA)</p>
+                </CardContent>
+              </Card>
+              <Card className="border-border/70 bg-secondary/60">
+                <CardContent className="p-6">
+                  <p className="text-sm font-medium text-phoenix-600">Copertura</p>
+                  <p className="mt-2 text-xl font-semibold">Provincia e comuni limitrofi</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </AnimatedSection>
+
+      <AnimatedSection className="bg-secondary/70 py-20 sm:py-24">
+        <div className="container">
+          <SectionTitle
+            eyebrow="Recensioni"
+            title="Lavori ben eseguiti, comunicazione chiara."
+            description="Alcune testimonianze di clienti che si affidano a Phoenix Elettronica."
+            align="center"
+          />
+          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+            {testimonials.map((testimonial) => (
+              <TestimonialCard key={testimonial.name} {...testimonial} />
+            ))}
+          </div>
+          <div className="mt-8">
+            <QuickCtaBand
+              title="Preferisci parlare subito con noi?"
+              description="Una chiamata rapida spesso basta per capire tempi, urgenza e prossimo passo."
             />
           </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Card className="border-border/70 bg-secondary/60">
-              <CardContent className="p-6">
-                <p className="text-sm font-medium text-phoenix-600">Base operativa</p>
-                <p className="mt-2 text-xl font-semibold">Bari (BA)</p>
-              </CardContent>
-            </Card>
-            <Card className="border-border/70 bg-secondary/60">
-              <CardContent className="p-6">
-                <p className="text-sm font-medium text-phoenix-600">Copertura</p>
-                <p className="mt-2 text-xl font-semibold">Provincia e comuni limitrofi</p>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </AnimatedSection>
 
-      <AnimatedSection className="container py-20 sm:py-24">
-        <SectionTitle
-          eyebrow="Recensioni"
-          title="La fiducia nasce da lavori eseguiti bene e rapporti chiari."
-          description="Alcune testimonianze tipiche di clienti che si affidano a Phoenix Elettronica."
-          align="center"
-        />
-        <div className="mt-10 grid gap-5 lg:grid-cols-3">
-          {testimonials.map((testimonial) => (
-            <TestimonialCard key={testimonial.name} {...testimonial} />
-          ))}
-        </div>
-      </AnimatedSection>
-
-      <AnimatedSection className="container py-4 sm:py-8">
-        <SectionTitle
-          eyebrow="Servizi a Bari"
-          title="Pagine dedicate ai principali servizi a Bari."
-          description="Approfondimenti dedicati ai servizi piu' richiesti in citta' e provincia."
-        />
-        <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {localSeoPages.map((page) => (
-            <Card key={page.slug} className="border-border/70 bg-white">
-              <CardContent className="space-y-4 p-6">
-                <Badge>{page.navLabel}</Badge>
-                <h3 className="text-2xl font-semibold">{page.h1}</h3>
-                <p className="text-sm leading-6 text-muted-foreground">{page.intro}</p>
-                <Link
-                  href={`/${page.slug}`}
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-phoenix-600"
-                >
-                  Apri la pagina locale
-                  <ArrowRight className="size-4" />
-                </Link>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </AnimatedSection>
-
-      <AnimatedSection className="container">
-        <div className="rounded-[2rem] bg-charcoal px-6 py-10 text-white sm:px-10 sm:py-12">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-            <div className="max-w-2xl">
-              <Badge variant="dark" className="mb-4">
-                Preventivo rapido
-              </Badge>
-              <h2 className="text-balance text-3xl font-semibold sm:text-4xl">
-                Hai un intervento da organizzare o un impianto da aggiornare?
-              </h2>
-              <p className="mt-4 text-lg leading-8 text-white/72">
-                Contatta Phoenix Elettronica per una valutazione chiara, rapida e orientata alla
-                soluzione piu' adatta al tuo contesto.
-              </p>
+      <AnimatedSection className="bg-white py-16 sm:py-20">
+        <div className="container">
+          <div className="rounded-[2rem] bg-charcoal px-6 py-10 text-white sm:px-10 sm:py-12">
+            <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+              <div className="max-w-2xl">
+                <Badge variant="dark" className="mb-4">
+                  Preventivo rapido
+                </Badge>
+                <h2 className="text-balance text-3xl font-semibold sm:text-4xl">
+                  Hai un intervento da organizzare o un impianto da aggiornare?
+                </h2>
+                <p className="mt-4 text-lg leading-8 text-white/72">
+                  Parlaci del lavoro da fare e ti ricontattiamo con una proposta chiara.
+                </p>
+              </div>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <CTAButton href={company.mobileHref} label="Chiama ora" />
+                <CTAButton href="/preventivo" label="Richiedi preventivo" variant="secondary" />
+              </div>
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <CTAButton href={company.mobileHref} label="Chiama ora" />
-              <CTAButton href="/preventivo" label="Richiedi preventivo" variant="secondary" />
-            </div>
-          </div>
-          <div className="mt-8 flex flex-wrap items-center gap-4 text-sm text-white/60">
-            <div className="inline-flex items-center gap-2">
-              <Star className="size-4 text-ember" />
-              Affidabilita'
-            </div>
-            <div className="inline-flex items-center gap-2">
-              <Star className="size-4 text-ember" />
-              Rapidita'
-            </div>
-            <div className="inline-flex items-center gap-2">
-              <Star className="size-4 text-ember" />
-              Precisione
+            <div className="mt-8 flex flex-wrap items-center gap-4 text-sm text-white/60">
+              <div className="inline-flex items-center gap-2">
+                <Star className="size-4 text-ember" />
+                Affidabilita'
+              </div>
+              <div className="inline-flex items-center gap-2">
+                <Star className="size-4 text-ember" />
+                Rapidita'
+              </div>
+              <div className="inline-flex items-center gap-2">
+                <Star className="size-4 text-ember" />
+                Precisione
+              </div>
             </div>
           </div>
         </div>

@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import { Award, BriefcaseBusiness, Wrench } from "lucide-react";
 
 import { AnimatedSection } from "@/components/animated-section";
 import { FeatureCard } from "@/components/feature-card";
 import { JsonLd } from "@/components/json-ld";
+import { QuickCtaBand } from "@/components/quick-cta-band";
 import { SectionTitle } from "@/components/section-title";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
 import { technicalFeatures } from "@/data/site";
 import { createBreadcrumbSchema, createPageMetadata } from "@/lib/seo";
 
@@ -16,24 +15,6 @@ export const metadata: Metadata = createPageMetadata({
     "Scopri Phoenix Elettronica: esperienza tecnica a Bari, soluzioni su misura, manutenzioni rapide e materiali di alta qualita'.",
   path: "/chi-siamo",
 });
-
-const values = [
-  {
-    icon: BriefcaseBusiness,
-    title: "Esperienza pratica",
-    text: "Emilio De Leonardis guida un approccio tecnico concreto, maturato su manutenzioni, impianti e richieste operative reali.",
-  },
-  {
-    icon: Wrench,
-    title: "Soluzioni su misura",
-    text: "Ogni intervento nasce da esigenze specifiche: tecnologia utile, configurazioni sensate e lavoro pulito.",
-  },
-  {
-    icon: Award,
-    title: "Standard qualitativo alto",
-    text: "La scelta dei materiali privilegia affidabilita' e durata, non il risparmio immediato a tutti i costi.",
-  },
-];
 
 export default function AboutPage() {
   return (
@@ -53,34 +34,22 @@ export default function AboutPage() {
             </h1>
           </div>
           <p className="max-w-2xl text-lg leading-8 text-muted-foreground">
-            Phoenix Elettronica realizza e mantiene impianti per condomini, aziende e privati,
-            unendo affidabilita', rapidita' esecutiva e una forte attenzione alla qualita' dei
-            materiali e delle soluzioni proposte.
+            Esperienza pratica, soluzioni sensate e un obiettivo semplice: risolvere il lavoro bene.
           </p>
         </div>
-      </section>
-
-      <AnimatedSection className="container py-4 sm:py-8">
-        <div className="grid gap-5 lg:grid-cols-3">
-          {values.map((value) => (
-            <Card key={value.title} className="border-border/70 bg-white">
-              <CardContent className="space-y-4 p-6">
-                <div className="flex size-14 items-center justify-center rounded-2xl bg-charcoal text-white">
-                  <value.icon className="size-6" />
-                </div>
-                <h2 className="text-xl font-semibold">{value.title}</h2>
-                <p className="text-sm leading-6 text-muted-foreground">{value.text}</p>
-              </CardContent>
-            </Card>
-          ))}
+        <div className="mt-8">
+          <QuickCtaBand
+            title="Ti basta sapere questo: possiamo aiutarti?"
+            description="Se si', chiama ora o apri il preventivo. Il resto lo definiamo insieme."
+          />
         </div>
-      </AnimatedSection>
+      </section>
 
       <AnimatedSection className="container py-20 sm:py-24">
         <SectionTitle
           eyebrow="Focus tecnico"
-          title="Tre aree chiave che raccontano il posizionamento Phoenix."
-          description="Contenuti sintetici, leggibili e orientati a far capire subito competenza, metodo e vantaggi per il cliente."
+          title="Tre punti chiave"
+          description="Solo quello che serve per capire come lavoriamo."
         />
         <div className="mt-10 grid gap-5 lg:grid-cols-3">
           {technicalFeatures.map((feature) => (
@@ -95,6 +64,7 @@ export default function AboutPage() {
             eyebrow="Qualita' e materiali"
             title="Scelte tecniche affidabili, non scorciatoie."
             description="Il criterio non e' la soluzione piu' economica nell'immediato, ma quella che mantiene stabilita', sicurezza e durata nel tempo."
+            tone="light"
           />
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             <div className="rounded-3xl border border-white/10 bg-white/5 p-5">

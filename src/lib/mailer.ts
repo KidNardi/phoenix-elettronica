@@ -71,36 +71,74 @@ export async function sendContactEmail(data: ContactFormValues) {
 
 export async function sendQuoteEmail(data: QuoteFormValues) {
   const transporter = createTransporter();
+  const from = sender();
+  const to = recipient();
 
-  await transporter.sendMail({
-    from: sender(),
-    to: recipient(),
-    subject: `[Preventivo] ${data.service} - ${data.name}`,
-    text: [
-      "Nuova richiesta di preventivo",
-      "",
-      `Nome: ${data.name}`,
-      `Telefono: ${data.phone}`,
-      `Email: ${data.email}`,
-      `Servizio: ${data.service}`,
-      `Urgenza: ${data.urgency}`,
-      `Zona: ${data.area}`,
-      "",
-      "Descrizione:",
-      data.description,
-    ].join("\n"),
-    html: `
-      <h2>Nuova richiesta di preventivo</h2>
-      <p><strong>Nome:</strong> ${escapeHtml(data.name)}</p>
-      <p><strong>Telefono:</strong> ${escapeHtml(data.phone)}</p>
-      <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
-      <p><strong>Servizio:</strong> ${escapeHtml(data.service)}</p>
-      <p><strong>Urgenza:</strong> ${escapeHtml(data.urgency)}</p>
-      <p><strong>Zona:</strong> ${escapeHtml(data.area)}</p>
-      <p><strong>Descrizione:</strong></p>
-      <p>${escapeHtml(data.description).replace(/\n/g, "<br />")}</p>
-    `,
-  });
+  await Promise.all([
+    transporter.sendMail({
+      from,
+      to,
+      replyTo: data.email,
+      subject: `[Preventivo] Nuovo preventivo - ${data.service} - ${data.name}`,
+      text: [
+        "Nuovo preventivo ricevuto dal sito",
+        "",
+        `Nome: ${data.name}`,
+        `Telefono: ${data.phone}`,
+        `Email: ${data.email}`,
+        `Servizio: ${data.service}`,
+        `Urgenza: ${data.urgency}`,
+        `Zona: ${data.area}`,
+        "",
+        "Descrizione:",
+        data.description,
+      ].join("\n"),
+      html: `
+        <h2>Nuovo preventivo ricevuto dal sito</h2>
+        <p><strong>Nome:</strong> ${escapeHtml(data.name)}</p>
+        <p><strong>Telefono:</strong> ${escapeHtml(data.phone)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
+        <p><strong>Servizio:</strong> ${escapeHtml(data.service)}</p>
+        <p><strong>Urgenza:</strong> ${escapeHtml(data.urgency)}</p>
+        <p><strong>Zona:</strong> ${escapeHtml(data.area)}</p>
+        <p><strong>Descrizione:</strong></p>
+        <p>${escapeHtml(data.description).replace(/\n/g, "<br />")}</p>
+      `,
+    }),
+    transporter.sendMail({
+      from,
+      to: data.email,
+      subject: "Conferma richiesta preventivo - Phoenix Elettronica",
+      text: [
+        `Ciao ${data.name},`,
+        "",
+        "questa e' una mail autogenerata per confermare che la tua richiesta di preventivo e' stata inviata correttamente.",
+        "",
+        "Riepilogo richiesta:",
+        `Servizio: ${data.service}`,
+        `Urgenza: ${data.urgency}`,
+        `Zona: ${data.area}`,
+        "",
+        "Ti ricontatteremo il prima possibile.",
+        "",
+        "Phoenix Elettronica",
+      ].join("\n"),
+      html: `
+        <h2>Richiesta di preventivo ricevuta</h2>
+        <p>Ciao ${escapeHtml(data.name)},</p>
+        <p>
+          Questa e' una mail autogenerata per confermare che la tua richiesta di preventivo e'
+          stata inviata correttamente.
+        </p>
+        <p><strong>Riepilogo richiesta:</strong></p>
+        <p><strong>Servizio:</strong> ${escapeHtml(data.service)}</p>
+        <p><strong>Urgenza:</strong> ${escapeHtml(data.urgency)}</p>
+        <p><strong>Zona:</strong> ${escapeHtml(data.area)}</p>
+        <p>Ti ricontatteremo il prima possibile.</p>
+        <p>Phoenix Elettronica</p>
+      `,
+    }),
+  ]);
 }
 
 function escapeHtml(value: string) {

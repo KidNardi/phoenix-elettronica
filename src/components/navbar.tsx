@@ -1,5 +1,6 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -30,10 +31,10 @@ export function Navbar() {
   const solid = !isHome || isScrolled || isOpen;
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-5">
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:pt-5">
       <div
         className={cn(
-          "mx-auto flex max-w-6xl items-center justify-between rounded-[2rem] border px-3 py-3 transition-all duration-300 sm:px-4",
+          "mx-auto flex max-w-6xl items-center justify-between rounded-[2rem] border px-3 py-2.5 transition-all duration-300 sm:px-4 sm:py-3",
           solid
             ? "border-border/80 bg-white/92 shadow-[0_18px_60px_-24px_rgba(15,23,42,0.28)] backdrop-blur-xl"
             : "border-border/70 bg-white/88 shadow-[0_18px_60px_-24px_rgba(15,23,42,0.22)] backdrop-blur-xl",
@@ -82,32 +83,75 @@ export function Navbar() {
           {isOpen ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
       </div>
-      {isOpen ? (
-        <div className="mx-auto mt-3 max-w-6xl rounded-[2rem] border border-border/80 bg-white/96 p-4 shadow-soft backdrop-blur-xl lg:hidden">
-          <nav className="flex flex-col gap-2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "rounded-2xl px-4 py-3 text-sm transition-colors",
-                  pathname === link.href
-                    ? "bg-phoenix-500 text-white"
-                    : "text-foreground/78 hover:bg-secondary hover:text-foreground",
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Link
-              href={company.mobileHref}
-              className="mt-2 rounded-2xl bg-phoenix-500 px-4 py-3 text-center text-sm font-semibold text-white"
+      <AnimatePresence initial={false}>
+        {isOpen ? (
+          <motion.div
+            initial={{ opacity: 0, y: -14, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.98 }}
+            transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+            className="mx-auto mt-3 max-w-6xl origin-top rounded-[2rem] border border-border/80 bg-white p-4 shadow-[0_24px_80px_-24px_rgba(15,23,42,0.38)] lg:hidden"
+          >
+            <motion.nav
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={{
+                open: {
+                  transition: {
+                    staggerChildren: 0.045,
+                    delayChildren: 0.04,
+                  },
+                },
+                closed: {
+                  transition: {
+                    staggerChildren: 0.03,
+                    staggerDirection: -1,
+                  },
+                },
+              }}
+              className="flex flex-col gap-2"
             >
-              Chiama ora
-            </Link>
-          </nav>
-        </div>
-      ) : null}
+              {navLinks.map((link) => (
+                <motion.div
+                  key={link.href}
+                  variants={{
+                    open: { opacity: 1, y: 0 },
+                    closed: { opacity: 0, y: -8 },
+                  }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
+                >
+                  <Link
+                    href={link.href}
+                    className={cn(
+                      "block rounded-2xl px-4 py-3 text-sm transition-colors",
+                      pathname === link.href
+                        ? "bg-phoenix-500 text-white"
+                        : "bg-white text-foreground hover:bg-secondary hover:text-foreground",
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
+              <motion.div
+                variants={{
+                  open: { opacity: 1, y: 0 },
+                  closed: { opacity: 0, y: -8 },
+                }}
+                transition={{ duration: 0.18, ease: "easeOut" }}
+              >
+                <Link
+                  href={company.mobileHref}
+                  className="mt-2 block rounded-2xl bg-phoenix-500 px-4 py-3 text-center text-sm font-semibold text-white"
+                >
+                  Chiama ora
+                </Link>
+              </motion.div>
+            </motion.nav>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </header>
   );
 }

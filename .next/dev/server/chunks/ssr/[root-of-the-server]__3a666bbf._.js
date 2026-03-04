@@ -208,40 +208,41 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/ui/badge.tsx [app-rsc] (ecmascript)");
 ;
 ;
-function SectionTitle({ eyebrow, title, description, align = "left" }) {
+function SectionTitle({ eyebrow, title, description, align = "left", tone = "default" }) {
     const isCenter = align === "center";
+    const isLight = tone === "light";
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: isCenter ? "mx-auto max-w-3xl text-center" : "max-w-3xl",
         children: [
             eyebrow ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Badge"], {
-                variant: isCenter ? "default" : "neutral",
+                variant: isLight ? "dark" : isCenter ? "default" : "neutral",
                 className: "mb-4",
                 children: eyebrow
             }, void 0, false, {
                 fileName: "[project]/src/components/section-title.tsx",
-                lineNumber: 21,
+                lineNumber: 24,
                 columnNumber: 9
             }, this) : null,
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                className: "text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl",
+                className: isLight ? "text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl" : "text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl",
                 children: title
             }, void 0, false, {
                 fileName: "[project]/src/components/section-title.tsx",
-                lineNumber: 25,
+                lineNumber: 28,
                 columnNumber: 7
             }, this),
             description ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                className: "mt-4 text-pretty text-base leading-7 text-muted-foreground sm:text-lg",
+                className: isLight ? "mt-4 text-pretty text-base leading-7 text-white/70 sm:text-lg" : "mt-4 text-pretty text-base leading-7 text-muted-foreground sm:text-lg",
                 children: description
             }, void 0, false, {
                 fileName: "[project]/src/components/section-title.tsx",
-                lineNumber: 29,
+                lineNumber: 38,
                 columnNumber: 9
             }, this) : null
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/section-title.tsx",
-        lineNumber: 19,
+        lineNumber: 22,
         columnNumber: 5
     }, this);
 }

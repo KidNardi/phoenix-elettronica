@@ -5,6 +5,7 @@ import { AnimatedSection } from "@/components/animated-section";
 import { ContactForm } from "@/components/forms/contact-form";
 import { iconMap } from "@/components/icon-map";
 import { JsonLd } from "@/components/json-ld";
+import { QuickCtaBand } from "@/components/quick-cta-band";
 import { SectionTitle } from "@/components/section-title";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -19,6 +20,8 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function ContactsPage() {
+  const quickContacts = contactOptions.filter((item) => item.title !== "Sede");
+
   return (
     <div className="pb-20">
       <JsonLd
@@ -36,15 +39,20 @@ export default function ContactsPage() {
             </h1>
           </div>
           <p className="max-w-2xl text-lg leading-8 text-muted-foreground">
-            Telefono, cellulare, email e sede sempre disponibili per contatti rapidi e richieste
-            di intervento.
+            Qui devi poter fare una sola cosa in fretta: chiamare o inviarci una richiesta.
           </p>
+        </div>
+        <div className="mt-8">
+          <QuickCtaBand
+            title="Preferisci parlare subito o lasciare una richiesta?"
+            description="Scegli la via piu' rapida per il tuo intervento."
+          />
         </div>
       </section>
 
       <AnimatedSection className="container py-4 sm:py-8">
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-          {contactOptions.map((item) => {
+        <div className="grid gap-5 md:grid-cols-3">
+          {quickContacts.map((item) => {
             const Icon = iconMap[item.icon];
 
             return (
@@ -56,7 +64,6 @@ export default function ContactsPage() {
                     </div>
                     <p className="text-sm font-medium text-phoenix-600">{item.title}</p>
                     <p className="text-lg font-semibold">{item.value}</p>
-                    <p className="text-sm leading-6 text-muted-foreground">{item.note}</p>
                   </CardContent>
                 </Card>
               </Link>
@@ -66,41 +73,22 @@ export default function ContactsPage() {
       </AnimatedSection>
 
       <AnimatedSection className="container py-20 sm:py-24">
-        <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
-          <Card className="border-border/70 bg-charcoal text-white">
-            <CardContent className="space-y-8 p-8">
+        <div className="grid gap-6 lg:grid-cols-[0.78fr_1.22fr]">
+          <Card className="border-border/70 bg-secondary/60">
+            <CardContent className="space-y-5 p-8">
               <SectionTitle
-                eyebrow="Informazioni utili"
-                title="Sede, orari e disponibilita'"
-                description="Tutti i riferimenti essenziali per contattarci o raggiungere la sede."
+                eyebrow="Sede"
+                title="Dove siamo"
+                description="Riferimenti essenziali, senza ripetizioni."
               />
-              <div className="space-y-4 text-sm text-white/75">
+              <div className="space-y-4 text-sm leading-6 text-foreground/80">
                 <p>
-                  <span className="font-semibold text-white">Sede:</span> {company.address}
+                  <span className="font-semibold text-foreground">Indirizzo:</span> {company.address}
                 </p>
                 <p>
-                  <span className="font-semibold text-white">Tel/Fax:</span> {company.phone}
-                </p>
-                <p>
-                  <span className="font-semibold text-white">Cell:</span> {company.mobile}
-                </p>
-                <p>
-                  <span className="font-semibold text-white">Email:</span> {company.email}
-                </p>
-                <p>
-                  <span className="font-semibold text-white">Orari:</span> Lun-Ven 08:30-13:00 /
+                  <span className="font-semibold text-foreground">Orari:</span> Lun-Ven 08:30-13:00 /
                   15:30-19:00
                 </p>
-              </div>
-              <div className="rounded-[1.75rem] border border-white/10 bg-white/5 p-6">
-                <p className="text-sm font-medium text-phoenix-300">Mappa</p>
-                <p className="mt-3 text-sm leading-6 text-white/70">
-                  La sede si trova in Via Papa Innocenzo XII, 19 a Bari, in una zona facilmente
-                  raggiungibile dalla citta' e dalla provincia.
-                </p>
-                {/* TODO: inserire iframe mappa
-                <iframe src="..." title="Mappa Phoenix Elettronica" />
-                */}
               </div>
             </CardContent>
           </Card>
@@ -109,8 +97,8 @@ export default function ContactsPage() {
             <CardContent className="p-8">
               <SectionTitle
                 eyebrow="Scrivici"
-                title="Richiedi informazioni"
-                description="Compila il form e raccontaci brevemente la tua richiesta."
+                title="Invia la richiesta"
+                description="Compila il form e raccontaci brevemente la richiesta."
               />
               <div className="mt-8">
                 <ContactForm />

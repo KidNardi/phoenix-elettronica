@@ -3,8 +3,7 @@ import { Inter } from "next/font/google";
 
 import "@/app/globals.css";
 
-import { Footer } from "@/components/footer";
-import { Navbar } from "@/components/navbar";
+import { SiteChrome } from "@/components/site-chrome";
 import { AppToaster } from "@/components/ui/toaster";
 import { siteConfig } from "@/lib/site";
 
@@ -65,9 +64,7 @@ export default function RootLayout({
   return (
     <html lang="it">
       <body className={`${inter.variable} font-sans`}>
-        <Navbar />
-        <main className="overflow-x-clip">{children}</main>
-        <Footer />
+        <SiteChrome>{children}</SiteChrome>
         <AppToaster />
       </body>
     </html>
