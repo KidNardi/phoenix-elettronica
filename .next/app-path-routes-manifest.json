@@ -1,0 +1,20 @@
+{
+  "/[localSlug]/page": "/[localSlug]",
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/api/contact/route": "/api/contact",
+  "/api/quote/route": "/api/quote",
+  "/apple-icon/route": "/apple-icon",
+  "/chi-siamo/page": "/chi-siamo",
+  "/contatti/page": "/contatti",
+  "/icon.svg/route": "/icon.svg",
+  "/manifest.webmanifest/route": "/manifest.webmanifest",
+  "/opengraph-image/route": "/opengraph-image",
+  "/page": "/",
+  "/preventivo/grazie/page": "/preventivo/grazie",
+  "/preventivo/page": "/preventivo",
+  "/privacy-policy/page": "/privacy-policy",
+  "/robots.txt/route": "/robots.txt",
+  "/servizi/page": "/servizi",
+  "/sitemap.xml/route": "/sitemap.xml"
+}

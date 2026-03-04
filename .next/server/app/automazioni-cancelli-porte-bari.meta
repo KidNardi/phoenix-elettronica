@@ -1,0 +1,15 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/[localSlug]/layout,_N_T_/[localSlug]/page,_N_T_/automazioni-cancelli-porte-bari"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/$d$localSlug/__PAGE__",
+    "/$d$localSlug",
+    "/_index",
+    "/_head"
+  ]
+}

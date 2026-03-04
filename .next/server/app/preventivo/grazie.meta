@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/preventivo/layout,_N_T_/preventivo/grazie/layout,_N_T_/preventivo/grazie/page,_N_T_/preventivo/grazie"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/preventivo/grazie/__PAGE__",
+    "/preventivo/grazie",
+    "/preventivo",
+    "/_index",
+    "/_head"
+  ]
+}
